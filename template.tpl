@@ -2,7 +2,7 @@ ___TERMS_OF_SERVICE___
 
 By creating or modifying this file you agree to Google Tag Manager's Community
 Template Gallery Developer Terms of Service available at
-https://developers.google.com/tag-manager/gallery-tos (or such other URL as
+https: //developers.google.com/tag-manager/gallery-tos (or such other URL as
 Google may provide), as modified from time to time.
 
 ___INFO___
@@ -12,7 +12,7 @@ ___INFO___
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "Cookie Control Template",
+  "displayName": "CIVIC Cookie Control Template - modified",
   "categories": [
     "PERSONALIZATION",
     "TAG_MANAGEMENT"
@@ -86,7 +86,7 @@ ___TEMPLATE_PARAMETERS___
           },
           {
             "displayValue": "Granted",
-             "value": "granted"
+            "value": "granted"
           }
         ],
         "displayName": "Analytical cookies",
@@ -104,7 +104,7 @@ ___TEMPLATE_PARAMETERS___
           },
           {
             "displayValue": "Granted",
-             "value": "granted"
+            "value": "granted"
           }
         ],
         "displayName": "Marketing cookies",
@@ -113,20 +113,91 @@ ___TEMPLATE_PARAMETERS___
         "type": "SELECT",
         "defaultValue": "denied"
       },
-        {
-          "type": "TEXT",
-          "name": "wait_for_update",
-          "displayName": "Wait for Update",
-          "simpleValueType": true,
-          "valueUnit": "milliseconds",
-          "defaultValue": 500,
-          "help": "How long to wait (in milliseconds) for an \u003cstrong\u003eUpdate\u003c/strong\u003e command before firing queued Google tags.",
-          "valueValidators": [
-              {
-                  "type": "NON_NEGATIVE_NUMBER"
-              }
-          ]
+      {
+        "valueValidators": [
+          {
+            "errorMessage": "Please provide your list of cookies",
+            "type": "NON_EMPTY"
           }
+        ],
+        "displayName": "Essential Cookies listed, in single quotes and comma seperated",
+        "simpleValueType": true,
+        "name": "essentialCookies",
+        "type": "TEXT"
+      },
+      {
+        "valueValidators": [
+          {
+            "errorMessage": "Please provide your list of cookies",
+            "type": "NON_EMPTY"
+          }
+        ],
+        "displayName": "Analytical Cookies listed, in single quotes and comma seperated",
+        "simpleValueType": true,
+        "name": "analyticsCookies",
+        "type": "TEXT"
+      },
+      {
+        "valueValidators": [
+          {
+            "errorMessage": "Please provide your list of cookies",
+            "type": "NON_EMPTY"
+          }
+        ],
+        "displayName": "Marketing Cookies listed, in single quotes and comma seperated",
+        "simpleValueType": true,
+        "name": "marketingCookies",
+        "type": "TEXT"
+      },
+      {
+        "displayName": "Font family, CSS friendly",
+        "simpleValueType": true,
+        "name": "fontFamily",
+        "type": "TEXT"
+      },
+      {
+        "macrosInSelect": false,
+        "selectItems": [
+          {
+            "displayValue": "Dark Theme",
+            "value": "dark"
+          },
+          {
+            "displayValue": "Light Theme",
+            "value": "light"
+          },
+        ],
+        "displayName": "General Theme",
+        "simpleValueType": true,
+        "name": "theme-selection",
+        "type": "SELECT"
+      },
+      {
+        "displayName": "Font colour, HEX",
+        "simpleValueType": true,
+        "name": "fontColour",
+        "type": "TEXT"
+      },
+      {
+        "displayName": "Background colour, HEX",
+        "simpleValueType": true,
+        "name": "bgColour",
+        "type": "TEXT"
+      },
+      {
+        "type": "TEXT",
+        "name": "wait_for_update",
+        "displayName": "Wait for Update",
+        "simpleValueType": true,
+        "valueUnit": "milliseconds",
+        "defaultValue": 500,
+        "help": "How long to wait (in milliseconds) for an \u003cstrong\u003eUpdate\u003c/strong\u003e command before firing queued Google tags.",
+        "valueValidators": [
+          {
+            "type": "NON_NEGATIVE_NUMBER"
+          }
+        ]
+      }
     ]
   }
 ]
@@ -150,7 +221,7 @@ let dataLayerPush  = createQueue('dataLayer');
 log('data', data);
 log(
     'defaultConsentState',
-    {
+{
       'analytics_storage': data.analytical,
       'ad_storage': data.marketing,
       'ad_user_data': data.marketing,
@@ -159,7 +230,7 @@ log(
       'functionality_storage': 'granted',
       'security_storage': 'granted',
       'wait_for_update': makeNumber(data.wait_for_update)
-    }
+}
 );
 // set default consent
 setDefaultConsentState({
@@ -176,38 +247,39 @@ var config = {
     apiKey: data.apiKey,
     product: data.product,
     optionalCookies: [
-        {
+    {
             name : 'Analytics',
             label: 'Analytical Cookies',
             description: 'Analytical cookies help us to improve our website by collecting and reporting information on its usage.',
-            cookies: ['_ga', '_ga*', '_gid', '_gat', '__utma', '__utmt', '__utmb', '__utmc', '__utmz', '__utmv'],
+            cookies: ['_ga', '_ga*', '_gid', '_gat', '__utma', '__utmt', '__utmb', '__utmc', '__utmz', '__utmv'
+      ],
             onAccept : function(){
                 updateConsentState({
                 'analytics_storage': 'granted'
-                });
+        });
                 dataLayerPush({
                   'event': 'analytics_accept',
                   'category': 'analytics'
-                });
-            },
+        });
+      },
             onRevoke: function(){
                 updateConsentState({
                 'analytics_storage': 'denied'
-                });
+        });
                 dataLayerPush({
                   'event': 'analytics_revoke',
                   'category': 'analytics'
-                });
-            },
+        });
+      },
             vendors: [
-              {
+        {
                 name: 'Google',
                 description: 'Google Analytics is used to track website performance and user behaviour to better understand how users interact with our content.',
-                url: 'https://business.safety.google/privacy/'
-              }
-            ]
-        },
-        {
+                url: 'https: //business.safety.google/privacy/'
+        }
+      ]
+    },
+    {
             name : 'marketing',
             label: 'Marketing Cookies',
             description: 'We use marketing cookies to help us improve the relevancy of suggested content and advertising campaigns.',
@@ -217,45 +289,45 @@ var config = {
                 'ad_user_data': 'granted',
                 'ad_personalization': 'granted',
                 'personalization_storage': 'granted'
-                });
+        });
                 dataLayerPush({
                   'event': 'marketing_accept',
                   'category': 'marketing'
-                });
-            },
+        });
+      },
             onRevoke: function(){
                 updateConsentState({
                 'ad_storage': 'denied',
                 'ad_user_data': 'denied',
                 'ad_personalization': 'denied',
                 'personalization_storage': 'denied'
-                });
+        });
                 dataLayerPush({
                   'event': 'marketing_revoke',
                   'category': 'marketing'
-                });
-            },
+        });
+      },
             vendors: [
-              {
+        {
                 name: 'Google',
                 description: 'Google Marketing Products help deliver personalised advertising and relevant content based on your browsing habits and preferences.',
-                url: 'https://business.safety.google/privacy/'
-              }
-            ]
+                url: 'https: //business.safety.google/privacy/'
         }
-    ]
+      ]
+    }
+  ]
 };
 const onSuccess = () => {
     const CookieControl = copyFromWindow('CookieControl');
     log(config);
     CookieControl.load(config);
     data.gtmOnSuccess();
-  };
+};
 const onFailure = () => {
     log("fail");
     data.gtmOnFailure();
-  };
-injectScript('https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js', onSuccess, onFailure);
+};
+injectScript('https: //cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js', onSuccess, onFailure);
 
 ___WEB_PERMISSIONS___
 
@@ -647,31 +719,31 @@ ___WEB_PERMISSIONS___
     "isRequired": true
   },
   {
-      "instance": {
-        "key": {
-          "publicId": "write_data_layer",
-          "versionId": "1"
-        },
-        "param": [
-          {
-            "key": "keyPatterns",
-            "value": {
-              "type": 2,
-              "listItem": [
-                {
-                  "type": 1,
-                  "string": "developer_id.*"
-                }
-              ]
-            }
+    "instance": {
+      "key": {
+        "publicId": "write_data_layer",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "keyPatterns",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 1,
+                "string": "developer_id.*"
+              }
+            ]
           }
-        ]
-      },
-      "clientAnnotations": {
-        "isEditedByUser": true
-      },
-      "isRequired": true
-    }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
+  }
 ]
 
 ___TESTS___
