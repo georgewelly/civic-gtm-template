@@ -260,15 +260,16 @@ const setDefaultConsentState = require('setDefaultConsentState');
 const createQueue = require('createQueue');
 const copyFromWindow = require('copyFromWindow');
 const makeNumber = require('makeNumber');
-const parseJSON = require('parseJSON');
-
+const JSON_API = require('JSON');
 let dataLayerPush = createQueue('dataLayer');
 
 function parseJsonOrEmpty(str) {
   if (!str) return [];
-  var parsed = parseJSON(str);
+  var parsed = JSON_API.parse(str);
   return parsed || [];
 }
+
+
 
 // Convert comma-separated cookie lists to arrays
 function parseCookies(str) {
@@ -790,9 +791,11 @@ ___WEB_PERMISSIONS___
   }
 ]
 
+
 ___TESTS___
 
 scenarios: []
+
 
 ___NOTES___
 
