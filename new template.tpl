@@ -28,6 +28,7 @@ ___INFO___
   ]
 }
 ___TEMPLATE_PARAMETERS___
+
 [
   {
     "displayName": "Cookie Control Configuration",
@@ -74,7 +75,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "displayName": "Default Consent Mode settings",
     "name": "default_consent_mode_settings",
-    "groupStyle": "NO_ZIPPY",
+    "groupStyle": "ZIPPY_OPEN",
     "type": "GROUP",
     "subParams": [
       {
@@ -86,14 +87,14 @@ ___TEMPLATE_PARAMETERS___
           },
           {
             "displayValue": "Granted",
-             "value": "granted"
+            "value": "granted"
           }
         ],
         "displayName": "Analytical cookies",
+        "defaultValue": "denied",
         "simpleValueType": true,
         "name": "analytical",
-        "type": "SELECT",
-        "defaultValue": "denied"
+        "type": "SELECT"
       },
       {
         "macrosInSelect": false,
@@ -104,29 +105,181 @@ ___TEMPLATE_PARAMETERS___
           },
           {
             "displayValue": "Granted",
-             "value": "granted"
+            "value": "granted"
           }
         ],
         "displayName": "Marketing cookies",
+        "defaultValue": "denied",
         "simpleValueType": true,
         "name": "marketing",
-        "type": "SELECT",
-        "defaultValue": "denied"
+        "type": "SELECT"
       },
-        {
-          "type": "TEXT",
-          "name": "wait_for_update",
-          "displayName": "Wait for Update",
-          "simpleValueType": true,
-          "valueUnit": "milliseconds",
-          "defaultValue": 500,
-          "help": "How long to wait (in milliseconds) for an \u003cstrong\u003eUpdate\u003c/strong\u003e command before firing queued Google tags.",
-          "valueValidators": [
-              {
-                  "type": "NON_NEGATIVE_NUMBER"
-              }
-          ]
+      {
+        "help": "How long to wait (in milliseconds) for an \u003cstrong\u003eUpdate\u003c/strong\u003e command before firing queued Google tags.",
+        "valueValidators": [
+          {
+            "type": "NON_NEGATIVE_NUMBER"
           }
+        ],
+        "displayName": "Wait for Update",
+        "defaultValue": 500,
+        "simpleValueType": true,
+        "name": "wait_for_update",
+        "valueUnit": "milliseconds",
+        "type": "TEXT"
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "define-cookies",
+    "displayName": "Define Cookies",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "TEXT",
+        "name": "essential-cookies",
+        "displayName": "Essential Cookies",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "analytics-cookies",
+        "displayName": "Analytics Cookies",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "analytics-vendors-json",
+        "displayName": "Analytics Cookies Vendors (.json)",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "marketing-cookies",
+        "displayName": "Marketing Cookies",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "marketing-vendors-json",
+        "displayName": "Marketing Cookies Vendors (.json)",
+        "simpleValueType": true
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "theme_settings_section",
+    "displayName": "Theme Settings",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "CHECKBOX",
+        "name": "default_theme",
+        "checkboxText": "Simple light mode (if not using custom colors)",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "font-family",
+        "displayName": "Font family, CSS friendly",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "font-color",
+        "displayName": "Font colour, HEX",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "bg-color",
+        "displayName": "Background Colour",
+        "simpleValueType": true
+      },
+      {
+        "type": "SELECT",
+        "name": "bannerStyle",
+        "displayName": "Banner Style",
+        "macrosInSelect": false,
+        "selectItems": [
+          {
+            "value": "open",
+            "displayValue": "open"
+          },
+          {
+            "value": "closed",
+            "displayValue": "closed"
+          },
+          {
+            "value": "notify",
+            "displayValue": "notify"
+          },
+          {
+            "value": "top",
+            "displayValue": "top"
+          },
+          {
+            "value": "box",
+            "displayValue": "box"
+          }
+        ],
+        "simpleValueType": true
+      },
+      {
+        "type": "RADIO",
+        "name": "position",
+        "displayName": "Banner Position",
+        "radioItems": [
+          {
+            "value": "left",
+            "displayValue": "Left-hand side"
+          },
+          {
+            "value": "right",
+            "displayValue": "Right-hand side"
+          }
+        ],
+        "simpleValueType": true
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "banner_behaviour",
+    "displayName": "Banner Behaviour",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "CHECKBOX",
+        "name": "notify-once",
+        "checkboxText": "Only notify once",
+        "simpleValueType": true
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "do-not-accept-button",
+        "checkboxText": "Hide do not accept button",
+        "simpleValueType": true
+      },
+      {
+        "type": "SELECT",
+        "name": "toggle-type",
+        "displayName": "Button toggle type",
+        "macrosInSelect": false,
+        "selectItems": [
+          {
+            "value": "slider",
+            "displayValue": "Slider"
+          },
+          {
+            "value": "checkbox",
+            "displayValue": "Checkbox"
+          }
+        ],
+        "simpleValueType": true
+      }
     ]
   }
 ]
@@ -175,12 +328,13 @@ setDefaultConsentState({
 var config = {
     apiKey: data.apiKey,
     product: data.product,
+    necessaryCookies: data.necessaryCookies ? data.necessaryCookies.split(',').map(cookie => cookie.trim()) : [],
     optionalCookies: [
         {
             name : 'Analytics',
             label: 'Analytical Cookies',
             description: 'Analytical cookies help us to improve our website by collecting and reporting information on its usage.',
-            cookies: ['_ga', '_ga*', '_gid', '_gat', '__utma', '__utmt', '__utmb', '__utmc', '__utmz', '__utmv'],
+            cookies: data.anaylticsCookies,
             onAccept : function(){
                 updateConsentState({
                 'analytics_storage': 'granted'
@@ -199,18 +353,13 @@ var config = {
                   'category': 'analytics'
                 });
             },
-            vendors: [
-              {
-                name: 'Google',
-                description: 'Google Analytics is used to track website performance and user behaviour to better understand how users interact with our content.',
-                url: 'https://business.safety.google/privacy/'
-              }
-            ]
+            vendors: data.analytics-vendors
         },
         {
             name : 'marketing',
             label: 'Marketing Cookies',
             description: 'We use marketing cookies to help us improve the relevancy of suggested content and advertising campaigns.',
+            cookies: data.marketingCookies,
             onAccept : function(){
                 updateConsentState({
                 'ad_storage': 'granted',
@@ -235,15 +384,20 @@ var config = {
                   'category': 'marketing'
                 });
             },
-            vendors: [
-              {
-                name: 'Google',
-                description: 'Google Marketing Products help deliver personalised advertising and relevant content based on your browsing habits and preferences.',
-                url: 'https://business.safety.google/privacy/'
-              }
-            ]
+            vendors: data.marketingVendors
         }
-    ]
+    ],
+    position: data.position || 'right',
+    theme: data.theme || 'dark',
+    toggleType: data.toggleType || 'slider',
+    rejectButton: data.rejectButton || true,
+    notifyOnce: data.notifyOnce || true,
+    branding: {
+        fontFamily: data.fontFamily,
+        fontColor: data.fontColor ,
+        backgroundColor: data.backgroundColor
+    }
+
 };
 const onSuccess = () => {
     const CookieControl = copyFromWindow('CookieControl');
