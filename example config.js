@@ -1,5 +1,5 @@
-var config = {
-    "apiKey": "null",
+config = {
+"apiKey": "null",
     "product": "COMMUNITY",
     "optionalCookies": [{
         "name": "analytics",
@@ -27,5 +27,4 @@ var config = {
         "fontColor": "example-font-color",
         "backgroundColor": "example-font-bg-colour"
     }
-};
-
+}

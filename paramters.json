@@ -1,139 +1,103 @@
 ___TEMPLATE_PARAMETERS___
 [
-    {
-        "displayName": "Cookie Control Configuration",
-        "name": "Cookie Control Configuration",
-        "type": "LABEL"
-    },
-    {
-        "valueValidators": [
-            {
-                "errorMessage": "You must provide your apiKey",
-                "type": "NON_EMPTY"
-            }
-        ],
-        "displayName": "apiKey",
-        "simpleValueType": true,
-        "name": "apiKey",
-        "type": "TEXT"
-    },
-    {
+  {
+    "displayName": "Cookie Control Configuration",
+    "name": "Cookie Control Configuration",
+    "type": "LABEL"
+  },
+  {
+    "valueValidators": [
+      {
+        "errorMessage": "You must provide your apiKey",
+        "type": "NON_EMPTY"
+      }
+    ],
+    "displayName": "apiKey",
+    "simpleValueType": true,
+    "name": "apiKey",
+    "type": "TEXT"
+  },
+  {
+    "macrosInSelect": false,
+    "selectItems": [
+      {
+        "displayValue": "Community License",
+        "value": "COMMUNITY"
+      },
+      {
+        "displayValue": "Pro License",
+        "value": "PRO"
+      },
+      {
+        "displayValue": "Pro Multisite License",
+        "value": "PRO_MULTISITE"
+      },
+      {
+        "displayValue": "Enterprise PRO",
+        "value": "CUSTOM"
+      }
+    ],
+    "displayName": "product",
+    "simpleValueType": true,
+    "name": "product",
+    "type": "SELECT"
+  },
+  {
+    "displayName": "Default Consent Mode settings",
+    "name": "default_consent_mode_settings",
+    "groupStyle": "NO_ZIPPY",
+    "type": "GROUP",
+    "subParams": [
+      {
         "macrosInSelect": false,
         "selectItems": [
-            {
-                "displayValue": "Community License",
-                "value": "COMMUNITY"
-            },
-            {
-                "displayValue": "Pro License",
-                "value": "PRO"
-            },
-            {
-                "displayValue": "Pro Multisite License",
-                "value": "PRO_MULTISITE"
-            },
-            {
-                "displayValue": "Enterprise PRO",
-                "value": "CUSTOM"
-            }
+          {
+            "displayValue": "Denied",
+            "value": "denied"
+          },
+          {
+            "displayValue": "Granted",
+             "value": "granted"
+          }
         ],
-        "displayName": "product",
+        "displayName": "Analytical cookies",
         "simpleValueType": true,
-        "name": "product",
-        "type": "SELECT"
-    },
-    {
-        "displayName": "Default Consent Mode settings",
-        "name": "default_consent_mode_settings",
-        "groupStyle": "NO_ZIPPY",
-        "type": "GROUP",
-        "subParams": [
-            {
-                "macrosInSelect": false,
-                "selectItems": [
-                    {
-                        "displayValue": "Denied",
-                        "value": "denied"
-                    },
-                    {
-                        "displayValue": "Granted",
-                        "value": "granted"
-                    }
-                ],
-                "displayName": "Analytical cookies",
-                "simpleValueType": true,
-                "name": "analytical",
-                "type": "SELECT",
-                "defaultValue": "denied"
-            },
-            {
-                "macrosInSelect": false,
-                "selectItems": [
-                    {
-                        "displayValue": "Denied",
-                        "value": "denied"
-                    },
-                    {
-                        "displayValue": "Granted",
-                        "value": "granted"
-                    }
-                ],
-                "displayName": "Marketing cookies",
-                "simpleValueType": true,
-                "name": "marketing",
-                "type": "SELECT",
-                "defaultValue": "denied"
-            },
-            {
-                "valueValidators": [
-                    {
-                        "errorMessage": "Please provide your list of cookies",
-                        "type": "NON_EMPTY"
-                    }
-                ],
-                "displayName": "Essential Cookies listed, in single quotes and comma seperated",
-                "simpleValueType": true,
-                "name": "essentialCookies",
-                "type": "TEXT"
-            },
-                        {
-                "valueValidators": [
-                    {
-                        "errorMessage": "Please provide your list of cookies",
-                        "type": "NON_EMPTY"
-                    }
-                ],
-                "displayName": "Analytical Cookies listed, in single quotes and comma seperated",
-                "simpleValueType": true,
-                "name": "analyticsCookies",
-                "type": "TEXT"
-            },
-                        {
-                "valueValidators": [
-                    {
-                        "errorMessage": "Please provide your list of cookies",
-                        "type": "NON_EMPTY"
-                    }
-                ],
-                "displayName": "Marketing Cookies listed, in single quotes and comma seperated",
-                "simpleValueType": true,
-                "name": "marketingCookies",
-                "type": "TEXT"
-            },
-            {
-                "type": "TEXT",
-                "name": "wait_for_update",
-                "displayName": "Wait for Update",
-                "simpleValueType": true,
-                "valueUnit": "milliseconds",
-                "defaultValue": 500,
-                "help": "How long to wait (in milliseconds) for an \u003cstrong\u003eUpdate\u003c/strong\u003e command before firing queued Google tags.",
-                "valueValidators": [
-                    {
-                        "type": "NON_NEGATIVE_NUMBER"
-                    }
-                ]
-            }
-        ]
-    }
+        "name": "analytical",
+        "type": "SELECT",
+        "defaultValue": "denied"
+      },
+      {
+        "macrosInSelect": false,
+        "selectItems": [
+          {
+            "displayValue": "Denied",
+            "value": "denied"
+          },
+          {
+            "displayValue": "Granted",
+             "value": "granted"
+          }
+        ],
+        "displayName": "Marketing cookies",
+        "simpleValueType": true,
+        "name": "marketing",
+        "type": "SELECT",
+        "defaultValue": "denied"
+      },
+        {
+          "type": "TEXT",
+          "name": "wait_for_update",
+          "displayName": "Wait for Update",
+          "simpleValueType": true,
+          "valueUnit": "milliseconds",
+          "defaultValue": 500,
+          "help": "How long to wait (in milliseconds) for an \u003cstrong\u003eUpdate\u003c/strong\u003e command before firing queued Google tags.",
+          "valueValidators": [
+              {
+                  "type": "NON_NEGATIVE_NUMBER"
+              }
+          ]
+          }
+    ]
+  }
 ]
