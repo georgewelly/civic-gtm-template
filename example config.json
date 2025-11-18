@@ -1,0 +1,31 @@
+var config = {
+    "apiKey": "null",
+    "product": "COMMUNITY",
+    "optionalCookies": [{
+        "name": "analytics",
+        "label": "Analytical Cookies",
+        "description": "Analytical cookies help us to improve our website by collecting and reporting information on its usage.",
+        "cookies": ["analytics1", "analytics2", "analytics3"],
+        "onAccept": "function () {}",
+        "onRevoke": "function () {}"
+    }, {
+        "name": "marketing",
+        "label": "Marketing Cookies",
+        "description": "We use marketing cookies to help us improve the relevancy of advertising campaigns you receive.",
+        "cookies": ["marketing1", "marketing2"],
+        "onAccept": "function () {}",
+        "onRevoke": "function () {}"
+    }],
+    "position": "left",
+    "theme": "light",
+    "toggleType": "checkbox",
+    "closeOnGlobalChange": false,
+    "iabCMP": false,
+    "necessaryCookies": ["examplenecessary1", "asdfasdf2", "examplenecessary2"],
+    "branding": {
+        "fontFamily": "example-font",
+        "fontColor": "example-font-color",
+        "backgroundColor": "example-font-bg-colour"
+    }
+};
+
