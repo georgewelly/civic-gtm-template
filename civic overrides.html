@@ -1,16 +1,24 @@
 <style>
+  
+  :root {
+    --banner-primary-color: #fff;
+    --banner-secondary-color: #192853; 
+    --banner-font-color: #fff;
+  }
+  
+  
   #ccc {
     font-family: Montserrat, sans-serif;
   }
   
   #ccc-icon.ccc-icon--dark {
-      fill: #192853;
+      fill: var(--banner-secondary-color);
   }
   
   .ccc-content--dark {
     fill: #fff;
-    background-color: #192853;
-    color: #fff;
+    background-color: var(--banner-secondary-color);
+    color: var(--banner-font-color);
   }
   
   #ccc-close, #ccc #ccc-notify-dismiss, button#ccc-notify-reject {
@@ -22,8 +30,13 @@
   }
   
   #ccc #ccc-recommended-settings, #ccc #ccc-recommended-settings span {
-    border-color: white;
-    background-color: white;
-    color:   #192853 !important;
+    border-color: var(--banner-primary-color);
+    background-color: var(--banner-primary-color);
+    color: var(--banner-secondary-color) !important;
   }
-</style> 
+  
+  #ccc .optional-vendor-heading {
+    font-size: 16px;
+    color: var(--banner-font-color);
+  }
+</style>  
