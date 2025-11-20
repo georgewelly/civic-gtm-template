@@ -298,10 +298,10 @@ setDefaultConsentState({
 
 // Build the CookieControl config
 var config = {
-
+  
   apiKey: data.apiKey,
   product: data.product,
-
+  logConsent: true,
   branding: {
     fontFamily: data.fontFamily,
     fontColor: data.fontColor,
